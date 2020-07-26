@@ -1,0 +1,14 @@
+nav {
+  background-image: linear-gradient(to right top, #00dce5, #00e1de, #00e5d5, #00e9c9, #2aedbc);
+  display: flex;
+  svg {
+    padding: 1rem;
+  }
+  h1 {
+    margin: auto 0;
+    font-size: 2.5rem;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+}
