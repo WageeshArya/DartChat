@@ -4,7 +4,8 @@ import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
 import signupBg from '../../background/signupBg.svg';
 import './Signup.scss';
-export const Signup = () => {
+const firebase = require('firebase');
+export const Signup = (props) => {
   const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +29,28 @@ export const Signup = () => {
   const signupSubmit = e => {
     e.preventDefault();
     if(emailRegex.test(email) && (password === confPass)) {
-      console.log('correct');
+      firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(response => {
+        const user = {
+          email: response.user.email
+        }
+        firebase
+        .firestore()
+        .collection('users')
+        .doc(email)
+        .set(user)
+        .then(() => {
+          props.history.push('/dashboard')
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      }) 
     }
     else {
       if(password !== confPass && !emailRegex.test(email)) {

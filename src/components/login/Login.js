@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Login.scss';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
-export const Login = () => {
+import loginBg from '../../background/loginBg.svg';
+import Firebase from 'firebase';
+export const Login = (props) => {
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const [loginErr, setLoginErr] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confPass, setConfPass] = useState('');
 
   const emailUpdate = e => {
     setEmail(e.target.value);
@@ -16,22 +22,59 @@ export const Login = () => {
     setPassword(e.target.value);
   }
 
-  const confPassUpdate = e => {
-    setConfPass(e.target.value);
+  const loginSubmit = async e => {
+    e.preventDefault();
+    if(emailRegex.test(email)) {
+      Firebase
+      .auth()
+      .signInWithEmailAndPassword(email,password)
+      .then(() => {
+        props.history.push("/dashboard");
+      })
+      .catch(err => {
+        setLoginErr(true);
+      })
+      setTimeout(() => {
+        setLoginErr(false);
+      }, 2000)
+    }
+    else {
+      setEmailErr(true);
+    }
+    setTimeout(() => {
+      setEmailErr(false)
+    }, 2000)
   }
 
   return (
     <div className="login">
       <Navbar />
-      <form className="loginForm">
-        <label htmlFor="email">Email ID</label>
-        <input type="text" name="email" onChange={emailUpdate} />
-        <label htmlFor="pass">Password</label>
-        <input type="password" name="password" onChange={passwordUpdate} />
-        <label htmlFor="confPass">Confirm Password</label>
-        <input type="password" name="confPass" onChange={confPassUpdate} />
-        <input type="submit" value="Log in!" />
-      </form>
+      <div className="loginContainer">
+        <div className="loginImgContainer">
+          <h2>Welcome back!</h2>
+          <h3>Get in touch instantly with all the people you love.</h3>
+          <img src={loginBg} alt="Login-image"/>
+        </div>
+        <div>
+          <form className="loginForm" onSubmit={loginSubmit}>
+            <div className={emailErr ? 'error' : 'hide'}>Please enter a valid email address.</div>
+            <div className={loginErr ? 'error' : 'hide'}>Please re-check your login credentials.</div>
+            <h1>Log In!</h1>
+            <div>
+              <label htmlFor="email">Email ID</label>
+              <input type="text" id="email" onChange={emailUpdate} />
+            </div>
+            <div>
+              <label htmlFor="pass">Password</label>
+              <input type="password" name="password" onChange={passwordUpdate} />
+            </div>
+            <div>
+              <input type="submit" value="Log in!" />
+            </div>
+            <Link to="/">Don't have an account? Click here to Sign up!</Link>
+          </form>
+        </div>
+      </div>
       <Footer />
     </div>
   )
