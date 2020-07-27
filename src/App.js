@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import WeatherState from './context/DartChatState';
 import Login from './components/login/Login'
 import Signup from './components/signup/Signup';
 import Dashboard from './components/dashboard/Dashboard';
@@ -20,15 +21,17 @@ firebase.initializeApp({
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
-        </Switch>
-      </div>
+    <WeatherState>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/dashboard" component={Dashboard} />
+          </Switch>
+        </div>
       </Router>
+    </WeatherState>
   );
 }
 

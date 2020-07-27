@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Firebase from 'firebase';
 
+import DartChatContext from '../../context/DartChatContext';
+
 import ChatList from './ChatList';
+import Chat from './Chat';
 export const Dashboard = (props) => {
 
-  const [chats, setChats] = useState(null);
+  const ChatContext = useContext(DartChatContext);
+
+  const [chatList, setChatList] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [selectedChat, setSelectedChat] = useState(null);
+  const [showNewChatForm, setShowNewChatForm] = useState(false);
+
   useEffect(() => {
     Firebase.auth().onAuthStateChanged(async user => {
       if(!user) {
@@ -18,18 +26,29 @@ export const Dashboard = (props) => {
           .where('users', 'array-contains', user.email)
           .onSnapshot(async res => {
             const chats = res.docs.map(chat => chat.data())
-            setChats(chats);
+            ChatContext.setChats(chats);
+            setChatList(chats);
           });
           setUserEmail(user.email);
-          console.log(userEmail);
       }
     })
   },[])
-  console.log(chats);
+
+  const newChat = () => {
+    console.log('new chat');
+    setShowNewChatForm(true);
+  }
+
+  const selectChat = (index) => {
+    console.log(index);
+    setSelectedChat(index);
+  }  
+
   return (
     <div>
-      {!chats && <div>Loading...</div>}
-      {chats && <ChatList chats={chats} userEmail={userEmail} />}
+      {!chatList && <div>Loading...</div>}
+      {chatList && <ChatList chats={ChatContext.chats} userEmail={userEmail} selectChat={selectChat} />}
+      {selectedChat && <Chat chats={chatList} />}
     </div>
   )
 }
