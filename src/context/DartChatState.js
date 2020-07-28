@@ -19,13 +19,28 @@ const DartChatState = (props) => {
     })
   }
 
+  const setUserEmail = (userEmail) => {
+    dispatch({
+      type: SET_USER_EMAIL,
+      payload: userEmail
+    })
+  } 
+
+  const setSelectedChat = (index) => {
+    dispatch({
+      type: SET_SELECTED_CHAT,
+      payload: index
+    })
+  }
 
 
   return <DartChatContext.Provider value={{
     chats: state.chats,
     userEmail: state.userEmail,
     selectedChat: state.selectedChat,
-    setChats
+    setChats,
+    setUserEmail,
+    setSelectedChat
   }}>
     {props.children}
     </DartChatContext.Provider>

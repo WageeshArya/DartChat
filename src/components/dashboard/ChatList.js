@@ -1,21 +1,18 @@
 import React from 'react';
-
+import './ChatList.scss';
 export const ChatList = (props) => {
-  console.log(props.chats);
   return (
-    <div>
+    <div className="chatList">
       {
         (props.chats.length > 0) && 
           props.chats.map((chat, index) => {
             return (
             <div key={index} className="chatItem" onClick={() => props.selectChat(index)}>
               <div>
-                <div>{(chat.users.filter(user => user !== props.userEmail)[0].split('')[0]).toUpperCase()}</div>
-                <div>
-                  <div>{chat.users.filter(user => user !== props.userEmail)[0]}</div>
-                  {/* <p>{chat.messages[chat.messages.length-1].splice(0,20)}</p> */}
-                </div>
+                <div className="chatIcon">{(chat.users.filter(user => user !== props.userEmail)[0].split('')[0]).toUpperCase()}</div>
+                <div className="chatName">{chat.users.filter(user => user !== props.userEmail)[0]}</div>
               </div>
+              {/* <p>{chat.messages[chat.messages.length-1].message.splice(0,20)}</p> */}
             </div>
             )
           })

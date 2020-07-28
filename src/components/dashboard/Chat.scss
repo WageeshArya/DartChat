@@ -1,0 +1,40 @@
+.chatView {
+  background-color: #f7f7f7;
+  box-shadow: 5px 10px 10px #888888;
+  overflow-y: auto;
+  .chatHead {
+    background-color: #65FBD2;
+    padding: 1.25rem;
+  }
+  .chatMain {
+    margin: 1rem;
+    .myMessage {
+      width: 40%;
+      text-align: left;
+      // float: left;
+      background-color: #90A6FF;
+      margin: 0.5rem;
+      padding-bottom: 0;
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
+    .receivedMessage {
+      width: 40%;
+      text-align: right;
+      float: right;
+      background-color: #FF925A;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      padding-bottom: 0;
+      border-radius: 10px;
+    }
+  }
+}
+
+.sender {
+  font-size: 0.75rem;
+  margin: 0;
+}
+.message {
+  margin-top: 0;
+}

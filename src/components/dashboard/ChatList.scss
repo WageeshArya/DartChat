@@ -1,0 +1,33 @@
+.chatList {
+  overflow-y: auto;
+  height: 90vh;
+  background-color: white;
+  box-shadow: 5px 10px 10px #888888;
+
+}
+
+.chatItem {
+  background-color: #EEEEEE;
+  border-bottom: 1px solid #C4C4C4;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.chatItem > div {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  padding: 1rem;
+  .chatIcon {
+    background-color: #C4C4C4;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+  }
+  .chatName {
+    line-height: 30px;
+    padding-left: 0.25rem;
+  }
+}

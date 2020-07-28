@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import './Dashboard.scss';
 import Firebase from 'firebase';
 
 import DartChatContext from '../../context/DartChatContext';
@@ -30,6 +31,7 @@ export const Dashboard = (props) => {
             setChatList(chats);
           });
           setUserEmail(user.email);
+          ChatContext.setUserEmail(user.email)
       }
     })
   },[])
@@ -41,14 +43,14 @@ export const Dashboard = (props) => {
 
   const selectChat = (index) => {
     console.log(index);
-    setSelectedChat(index);
+    ChatContext.setSelectedChat(index);
   }  
 
   return (
-    <div>
+    <div className="dashboard">
       {!chatList && <div>Loading...</div>}
       {chatList && <ChatList chats={ChatContext.chats} userEmail={userEmail} selectChat={selectChat} />}
-      {selectedChat && <Chat chats={chatList} />}
+      <Chat />
     </div>
   )
 }
