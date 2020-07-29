@@ -1,25 +1,56 @@
+$alertColor: #FF8080;
+$newChat: #57BF80;
 .chatList {
   overflow-y: auto;
-  height: 90vh;
+  height: 100vh;
   background-color: white;
   box-shadow: 5px 10px 10px #888888;
-
+  display: grid;
+  grid-template-rows: 1fr 12fr 1fr;
+  div {
+    button {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: none;
+      background-color: $newChat;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .signOutBtn {
+      background-color: $alertColor;
+      &:active {
+        background-color: #E571A1;
+      }
+    }
+  }
 }
 
 .chatItem {
+  display: grid;
+  grid-template-rows: 1fr 0.25fr;
   background-color: #EEEEEE;
   border-bottom: 1px solid #C4C4C4;
   &:hover {
     cursor: pointer;
   }
+  p {
+    font-size: 0.8rem;
+    color: #333333;
+    margin: 0 3rem 1rem 1rem;  
+  }
 }
 
 .chatItem > div {
   display: grid;
-  grid-template-columns: 1fr 9fr;
+  grid-template-columns: 1fr 8fr 1fr;
   padding: 1rem;
   .chatIcon {
-    background-color: #C4C4C4;
+    color: white;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -29,5 +60,12 @@
   .chatName {
     line-height: 30px;
     padding-left: 0.25rem;
+  }
+  .notificationBlip {
+    margin: 10px auto;
+    background-color: $alertColor;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
   }
 }

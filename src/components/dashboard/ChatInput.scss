@@ -1,0 +1,39 @@
+.chatInput {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 15fr 1fr;
+  input[type=text] {
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    margin: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 20px;
+    padding: 0 0.5rem;
+    outline: none;
+    box-shadow: 2px 5px 5px #C4C4C4;
+  }
+  button{
+    border: none;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 50%;
+    outline: none;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    width: 64px;
+    transition: all 0.1s ease;
+    &:hover {
+      cursor: pointer;
+      background-color: #C4C4C4;
+    }
+    img {
+      margin: 0;
+      height: 64px;
+      width: 64px
+    }
+  }
+}

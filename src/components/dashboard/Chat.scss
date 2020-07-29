@@ -1,33 +1,57 @@
+$myMessage: #7FD1AE;
+$receivedMessage: #90A6FF;
+$headerColor: #C3F9FF;
 .chatView {
+  display: grid;
+  grid-template-rows: 10fr 1fr;
+  height: 100vh;
   background-color: #f7f7f7;
   box-shadow: 5px 10px 10px #888888;
-  overflow-y: auto;
-  .chatHead {
-    background-color: #65FBD2;
-    padding: 1.25rem;
+  .chatBox {
+    overflow-y: auto;
+    // display: grid;
+    // grid-template-rows: 1fr 4fr;
+    .chatHead {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      height: 20px;
+      background-color: $headerColor;
+      padding: 1.25rem;
+      box-shadow: 1px 1px 10px #AAAAAA;
+    }
+    .chatMain {
+      overflow-y: auto;
+      margin: 1rem;
+      margin-top: 75px;
+      .messageDiv {
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+      .messageView {
+        box-shadow: 2px 3px 10px #C4C4C4;
+        margin: 0.5rem;
+        width: 40%;
+        padding: 0.5rem;
+        border-radius: 10px;
+      }
+      .receivedMessage {
+        text-align: left;
+        background-color: $receivedMessage;
+      }
+      .myMessage {
+        text-align: right;
+        margin: 0 0 0 auto;
+        background-color: $myMessage;
+      }
+    }
   }
-  .chatMain {
-    margin: 1rem;
-    .myMessage {
-      width: 40%;
-      text-align: left;
-      // float: left;
-      background-color: #90A6FF;
-      margin: 0.5rem;
-      padding-bottom: 0;
-      padding: 0.5rem;
-      border-radius: 10px;
-    }
-    .receivedMessage {
-      width: 40%;
-      text-align: right;
-      float: right;
-      background-color: #FF925A;
-      margin: 0.5rem;
-      padding: 0.5rem;
-      padding-bottom: 0;
-      border-radius: 10px;
-    }
+  
+  .inputDiv {
+    float: bottom;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

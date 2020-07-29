@@ -18,7 +18,7 @@ export const Dashboard = (props) => {
   useEffect(() => {
     Firebase.auth().onAuthStateChanged(async user => {
       if(!user) {
-        props.history.push("/");
+        props.history.push("/login");
       }
       else {
         await Firebase
@@ -41,9 +41,8 @@ export const Dashboard = (props) => {
     setShowNewChatForm(true);
   }
 
-  const selectChat = (index) => {
-    console.log(index);
-    ChatContext.setSelectedChat(index);
+  const selectChat = async (index) => {
+    await ChatContext.setSelectedChat(index);
   }  
 
   return (
