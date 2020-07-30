@@ -4,7 +4,7 @@ import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
 import signupBg from '../../background/signupBg.svg';
 import './Signup.scss';
-const firebase = require('firebase');
+import Firebase from 'firebase';
 export const Signup = (props) => {
   const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const [email, setEmail] = useState('');
@@ -29,17 +29,17 @@ export const Signup = (props) => {
   const signupSubmit = e => {
     e.preventDefault();
     if(emailRegex.test(email) && (password === confPass)) {
-      firebase
+      Firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(response => {
         const user = {
           email: response.user.email
         }
-        firebase
+        Firebase
         .firestore()
         .collection('users')
-        .doc(email)
+        .doc(user.email)
         .set(user)
         .then(() => {
           props.history.push('/dashboard')

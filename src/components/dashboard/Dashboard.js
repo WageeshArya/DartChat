@@ -19,6 +19,7 @@ export const Dashboard = (props) => {
     Firebase.auth().onAuthStateChanged(async user => {
       if(!user) {
         props.history.push("/login");
+        ChatContext.signout();
       }
       else {
         await Firebase

@@ -1,4 +1,4 @@
-import {SET_CHATS, SET_USER_EMAIL, SET_SELECTED_CHAT} from './types';
+import {SET_CHATS, SET_USER_EMAIL, SET_SELECTED_CHAT, SHOW_NEW_FORM, HIDE_NEW_FORM, SIGNOUT} from './types';
 
 export default (state, action) => {
   switch(action.type) {
@@ -17,5 +17,24 @@ export default (state, action) => {
         ...state,
         selectedChat: action.payload
       }
+    case SHOW_NEW_FORM:
+      return {
+        ...state,
+        showNewForm: true
+      }
+    case HIDE_NEW_FORM: 
+      return {
+        ...state,
+        showNewForm: false
+      }
+    case SIGNOUT: 
+      return {
+        chats: null,
+        userEmail: null,
+        selectedChat: null,
+        showNewForm: false
+      }
+    default: 
+      return state;
   }
 }
