@@ -8,7 +8,6 @@ export const ChatList = (props) => {
   let randomColor;
   const ChatContext = useContext(DartChatContext);
   const {chats, userEmail, selectedChat, showNewForm} = ChatContext;
-  const iconColors = ['#FF8080', '#574240', '#BFA5A4', '#00BAF1', '#0084B9', '#00C082', '#A797FF'];
   const [newChatVisible, setnewChatVisible] = useState(false);
 
   useEffect(() => {
@@ -48,11 +47,11 @@ export const ChatList = (props) => {
         {
         (chats.length > 0) &&
           chats.map((chat, index) => {
-            randomColor = iconColors[Math.floor(Math.random()*iconColors.length)];
+            
             return (
             <div key={index} className="chatItem" onClick={() => receiverClickedChat(index)}>
               <div>
-                <div className="chatIcon" style={{backgroundColor: randomColor}}>{(chat.users.filter(user => user !== userEmail)[0].split('')[0]).toUpperCase()}</div>
+                <div className="chatIcon" style={{backgroundColor: chat.iconColor}}>{(chat.users.filter(user => user !== userEmail)[0].split('')[0]).toUpperCase()}</div>
                 <div className="chatName">{chat.users.filter(user => user !== userEmail)[0]}</div>
                 <div className={!chat.readByReceiver && (userEmail !== chat.messages[chat.messages.length - 1].sender) ? 'notification' : 'hide'}><div className="notificationBlip"></div></div>
               </div>

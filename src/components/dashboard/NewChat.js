@@ -4,6 +4,8 @@ import './NewChat.scss';
 import Firebase from 'firebase';
 export const NewChat = (props) => {
 
+  const iconColors = ['#FF8080', '#574240', '#BFA5A4', '#00BAF1', '#0084B9', '#00C082', '#A797FF'];
+
   const ChatContext = useContext(DartChatContext);
   const [newRecepient, setNewRecepient] = useState('');
   const [newMessage, setNewMessage] = useState('');
@@ -82,10 +84,17 @@ export const NewChat = (props) => {
       messages: [{
         sender: ChatContext.userEmail,
         message: message
-      }] 
+      }],
+      iconColor: iconColors[Math.floor(Math.random()*iconColors.length)]
     })
     .then(response => {
-      ChatContext.setSelectedChat(ChatContext.chats.length - 1);
+      setTimeout(() => {
+        console.log(ChatContext.chats.length);
+        if(ChatContext.chats.length === 0)
+          ChatContext.setSelectedChat(0);
+        else 
+          ChatContext.setSelectedChat(ChatContext.chats.length - 1)
+      },500);
     })
   }
 

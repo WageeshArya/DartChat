@@ -14,6 +14,8 @@ export const Signup = (props) => {
   const [emailErr, setEmailErr] = useState(false);
   const [passErr, setPassErr] = useState(false);
 
+  const iconColors = ['#FF8080', '#574240', '#BFA5A4', '#00BAF1', '#0084B9', '#00C082', '#A797FF'];
+
   const emailUpdate = e => {
     setEmail(e.target.value);
   }
@@ -40,7 +42,10 @@ export const Signup = (props) => {
         .firestore()
         .collection('users')
         .doc(user.email)
-        .set(user)
+        .set({
+          email: response.user.email,
+          iconColor: iconColors[Math.floor(Math.random()*iconColors.length)]
+        })
         .then(() => {
           props.history.push('/dashboard')
         })
