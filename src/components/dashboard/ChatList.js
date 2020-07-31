@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './ChatList.scss';
 import DartChatContext from '../../context/DartChatContext';
+import search from '../../background/search.svg';
 import NewChat from './NewChat';
 import Firebase from 'firebase';
 export const ChatList = (props) => {
@@ -40,7 +41,11 @@ export const ChatList = (props) => {
       </div>
       <div className="chatListDiv">
         {
-          (chats.length === 0) && <div className="startChatDiv">Start a new chat!</div> 
+          (chats.length === 0) && 
+          <div className="startChatDiv">
+            <p>Start a new chat!</p>
+            <img src={search} alt="start a new chat"/>
+          </div> 
         }
         {
         (chats.length > 0) &&
