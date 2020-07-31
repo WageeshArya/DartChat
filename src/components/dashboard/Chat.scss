@@ -103,6 +103,9 @@ $headerColor: #C3F9FF;
   .chatView .chatBox .chatHead {
     padding: 0.5rem;
   }
+  .chatView .chatBox .chatMain {
+    margin-top: 40px;
+  }
   .chatView .chatBox .chatHead div img {
     width: 20px;
     height: 20px;
@@ -115,7 +118,7 @@ $headerColor: #C3F9FF;
   .chatView .chatBox .chatMain .messageView {
     width: 60%;
     .message {
-      margin: 0.5rem 0;
+      margin: 0.25rem 0;
     }
   }
 }

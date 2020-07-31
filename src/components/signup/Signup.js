@@ -13,7 +13,7 @@ export const Signup = (props) => {
 
   const [emailErr, setEmailErr] = useState(false);
   const [passErr, setPassErr] = useState(false);
-
+  const [passLenErr, setPassLenErr] = useState(false);
 
   const emailUpdate = e => {
     setEmail(e.target.value);
@@ -29,7 +29,7 @@ export const Signup = (props) => {
 
   const signupSubmit = e => {
     e.preventDefault();
-    if(emailRegex.test(email) && (password === confPass)) {
+    if(emailRegex.test(email) && (password === confPass) && (password.length > 6 && confPass.length > 6)) {
       Firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -63,13 +63,16 @@ export const Signup = (props) => {
       else if(!emailRegex.test(email)) {
         setEmailErr(true);
       }
-      else {
+      else if(password !== confPass) {
         setPassErr(true);
-        console.log('password err');
+      }
+      else {
+        setPassLenErr(true);
       }
       setTimeout(() => {
         setEmailErr(false);
         setPassErr(false);
+        setPassLenErr(false);
       },2000);
     }
   }
@@ -82,7 +85,7 @@ export const Signup = (props) => {
         <form className="signupForm">
           <div className={emailErr ? 'error' : 'hide' }>Please enter a valid Email ID</div>
           <div className={passErr ? 'error' : 'hide' }>The passwords you entered do not match</div>
-
+          <div className={passLenErr ? 'error' : 'hide'}>Passwords must exceed 6 characters</div>
           <h1>Sign up!</h1>
           <div>
             <label htmlFor="email">Email ID</label>
