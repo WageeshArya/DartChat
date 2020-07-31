@@ -14,6 +14,11 @@ export const Dashboard = (props) => {
   const [userEmail, setUserEmail] = useState(null);
   const [selectedChat, setSelectedChat] = useState(null);
   const [showNewChatForm, setShowNewChatForm] = useState(false);
+  const [showChatList, setShowChatList] = useState(true);
+
+  const toggleChatList = () => {
+    setShowChatList(!showChatList);
+  }
 
   useEffect(() => {
     Firebase.auth().onAuthStateChanged(async user => {
@@ -49,8 +54,8 @@ export const Dashboard = (props) => {
   return (
     <div className="dashboard">
       {!chatList && <div>Loading...</div>}
-      {chatList && <ChatList chats={ChatContext.chats} userEmail={userEmail} selectChat={selectChat} />}
-      <Chat />
+      {chatList && <ChatList showChatList={showChatList} toggleChatList={toggleChatList} chats={ChatContext.chats} userEmail={userEmail} selectChat={selectChat} />}
+      <Chat showChatList={showChatList} toggleChatList={toggleChatList} />
     </div>
   )
 }

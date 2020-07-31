@@ -9,7 +9,7 @@ export const NewChat = (props) => {
   const ChatContext = useContext(DartChatContext);
   const [newRecepient, setNewRecepient] = useState('');
   const [newMessage, setNewMessage] = useState('');
-
+  const [userNotFound, setUserNotFound] = useState(false);
   useEffect(() => {
     console.log(ChatContext.showNewForm);
   },[ChatContext.showNewForm]);
@@ -29,6 +29,7 @@ export const NewChat = (props) => {
     .map(doc => doc.data().email)
     .includes(newRecepient);
 
+    
     if(exists) {
       const key = [newRecepient, ChatContext.userEmail].sort().join(':');
       const oldChat = await Firebase
@@ -43,7 +44,10 @@ export const NewChat = (props) => {
         createChat(key, newMessage);
     }
     else {
-      console.log('user does not exist.');
+      setUserNotFound(true);
+      setTimeout(() => {
+        setUserNotFound(false);
+      },2500)
     }
 
     ChatContext.hideNewFormFn();
@@ -95,10 +99,9 @@ export const NewChat = (props) => {
         else 
           ChatContext.setSelectedChat(ChatContext.chats.length - 1)
       },500);
+      ChatContext.setShowChatList(false);
     })
   }
-
-  
 
   const closeForm = e => {
     e.preventDefault();
@@ -107,6 +110,9 @@ export const NewChat = (props) => {
 
   return (
     <div>
+      <div className={userNotFound ? 'userNotFound' : 'hide' }>
+      <p>Sorry, we couldn't find {newRecepient}</p>
+      </div>
       <form className={ChatContext.showNewForm ? 'newChatForm' : 'hide'} onSubmit={newChatFormSubmit}>
         <h3>New Chat</h3>
         <label htmlFor="newChatEmail">Recepient's email address</label>

@@ -5,10 +5,8 @@ import NewChat from './NewChat';
 import Firebase from 'firebase';
 export const ChatList = (props) => {
 
-  let randomColor;
   const ChatContext = useContext(DartChatContext);
-  const {chats, userEmail, selectedChat, showNewForm} = ChatContext;
-  const [newChatVisible, setnewChatVisible] = useState(false);
+  const {chats, userEmail, selectedChat} = ChatContext;
 
   useEffect(() => {
 
@@ -20,11 +18,11 @@ export const ChatList = (props) => {
     .signOut()
   }
 
-  const receiverClickedChat = (index) => { 
+  const receiverClickedChat = (index) => {
+    ChatContext.setShowChatList(false);
     props.selectChat(index);
     if(chats[index].messages[chats[index].messages.length - 1].sender !== userEmail) {
       const key = [userEmail, chats[index].users.filter(user => user !== userEmail)[0]].sort().join(':');
-      console.log(key);
       Firebase
       .firestore()
       .collection('chats')
@@ -36,7 +34,7 @@ export const ChatList = (props) => {
   }
 
   return (
-    <div className="chatList">
+    <div className={ChatContext.showChatList ? 'chatList' : 'chatList hideChatList' } >
       <div>
         <button className="newChatBtn" onClick={() => ChatContext.showNewFormFn()}>New chat</button>
       </div>

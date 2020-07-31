@@ -13,12 +13,17 @@ $headerColor: #C3F9FF;
     // grid-template-rows: 1fr 4fr;
     .chatHead {
       position: fixed;
+      display: flex;
+      flex-direction: row;
       width: 100%;
       top: 0;
       height: 20px;
       background-color: $headerColor;
       padding: 1.25rem;
       box-shadow: 1px 1px 10px #AAAAAA;
+      div img {
+        display: none;
+      }
     }
     .chatMain {
       overflow-y: auto;
@@ -61,4 +66,38 @@ $headerColor: #C3F9FF;
 }
 .message {
   margin-top: 0;
+}
+
+@media (max-width: 700px) {
+  .chatView .chatBox .chatHead {
+    padding: 1rem;
+  }
+  .chatView .chatBox .chatHead div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .chatView .chatBox .chatHead div img {
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
+  .chatView .chatBox .chatHead p {
+    margin: 0;
+    line-height: 20px;
+  }
+}
+@media (max-width: 400px) {
+  .chatView .chatBox .chatHead {
+    padding: 0.5rem;
+  }
+  .chatView .chatBox .chatHead div img {
+    width: 20px;
+    height: 20px;
+  }
+  .chatView .chatBox .chatHead p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 20px;
+  }
 }
