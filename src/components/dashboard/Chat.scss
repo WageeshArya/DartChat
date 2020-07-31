@@ -24,6 +24,9 @@ $headerColor: #C3F9FF;
       div img {
         display: none;
       }
+      p {
+        margin: 0;
+      }
     }
     .chatMain {
       overflow-y: auto;
@@ -32,6 +35,9 @@ $headerColor: #C3F9FF;
       .messageDiv {
         width: 100%;
         margin: 0.5rem 0;
+        .timestamp {
+          margin: 0;
+        }
       }
       .messageView {
         box-shadow: 2px 3px 10px #C4C4C4;
@@ -43,11 +49,17 @@ $headerColor: #C3F9FF;
       .receivedMessage {
         text-align: left;
         background-color: $receivedMessage;
+        .timestamp {
+          text-align: right;
+        }
       }
       .myMessage {
         text-align: right;
         margin: 0 0 0 auto;
         background-color: $myMessage;
+        .timestamp {
+          text-align: left;
+        }
       }
     }
   }
@@ -99,5 +111,11 @@ $headerColor: #C3F9FF;
     margin: 0;
     font-size: 0.75rem;
     line-height: 20px;
+  }
+  .chatView .chatBox .chatMain .messageView {
+    width: 60%;
+    .message {
+      margin: 0.5rem 0;
+    }
   }
 }

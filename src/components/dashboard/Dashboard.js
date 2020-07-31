@@ -3,9 +3,9 @@ import './Dashboard.scss';
 import Firebase from 'firebase';
 
 import DartChatContext from '../../context/DartChatContext';
-
 import ChatList from './ChatList';
 import Chat from './Chat';
+import Loading from '../loading/Loading';
 export const Dashboard = (props) => {
 
   const ChatContext = useContext(DartChatContext);
@@ -53,7 +53,7 @@ export const Dashboard = (props) => {
 
   return (
     <div className="dashboard">
-      {!chatList && <div>Loading...</div>}
+      {!chatList && <Loading />}
       {chatList && <ChatList showChatList={showChatList} toggleChatList={toggleChatList} chats={ChatContext.chats} userEmail={userEmail} selectChat={selectChat} />}
       <Chat showChatList={showChatList} toggleChatList={toggleChatList} />
     </div>

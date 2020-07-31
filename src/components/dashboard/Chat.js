@@ -14,7 +14,6 @@ export const Chat = (props) => {
     if(selectedChat !== null && chats[selectedChat].length > 1) {
       chat.scrollTo(0, chat.scrollHeight);
     }
-    console.log(chats, selectedChat);
   },[chats, selectedChat]);
 
   const hideChatHead = () => {
@@ -44,12 +43,13 @@ export const Chat = (props) => {
             <div className="chatMain">
               {chats[selectedChat].messages.map(message => {
                 if(message.sender) {
-                  console.log(message.sender);
+                  const date = new Date;
                   return (
                     <div className="messageDiv">
                       <div className={userEmail === message.sender ? 'messageView myMessage' : 'messageView receivedMessage' }>
                         <p className="sender"><strong>{message.sender}</strong></p>
                         <p className="message">{message.message}</p>
+                        <p className="timestamp">{message.timestamp}</p>
                       </div>
                     </div>
                   )

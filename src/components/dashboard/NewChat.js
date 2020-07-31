@@ -11,7 +11,6 @@ export const NewChat = (props) => {
   const [newMessage, setNewMessage] = useState('');
   const [userNotFound, setUserNotFound] = useState(false);
   useEffect(() => {
-    console.log(ChatContext.showNewForm);
   },[ChatContext.showNewForm]);
 
   const newChatFormSubmit = async e => {
@@ -54,6 +53,7 @@ export const NewChat = (props) => {
   }
 
   const sendMessage = async (key, message) => {
+    const date = new Date;
     await Firebase
       .firestore()
       .collection('chats')
@@ -62,7 +62,7 @@ export const NewChat = (props) => {
         messages: Firebase.firestore.FieldValue.arrayUnion({
           sender: ChatContext.userEmail,
           message: message,
-          timestamp: Date.now()
+          timestamp: `${date.getHours() > 12 ? date.getHours() - 12 : date.getHours()}:${date.getMinutes()} ${date.getHours() > 12 ? 'PM' : 'AM' }`
         }),
         readByReceiver: false
       })
@@ -78,6 +78,7 @@ export const NewChat = (props) => {
   }
 
   const createChat = (key, message) => {
+    const date = new Date;
     Firebase
     .firestore()
     .collection('chats')
@@ -87,7 +88,8 @@ export const NewChat = (props) => {
       users: [ChatContext.userEmail, key.split(':').filter(user => user !== ChatContext.userEmail)[0]],
       messages: [{
         sender: ChatContext.userEmail,
-        message: message
+        message: message,
+        timestamp: `${date.getHours() > 12 ? date.getHours() - 12 : date.getHours()}:${date.getMinutes()} ${date.getHours() > 12 ? 'PM' : 'AM' }`
       }],
       iconColor: iconColors[Math.floor(Math.random()*iconColors.length)]
     })

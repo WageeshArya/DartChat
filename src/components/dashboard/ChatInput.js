@@ -16,8 +16,8 @@ export const ChatInput = () => {
   const messageSubmit = e => {
     e.preventDefault();
     if(message && message.replace(/\s/g, '').length) {
+      const date = new Date;
       const key = [userEmail, chats[selectedChat].users.filter(user => user !== userEmail)[0]].sort().join(':');
-      console.log(key);
       firebase
       .firestore()
       .collection('chats')
@@ -26,7 +26,7 @@ export const ChatInput = () => {
         messages: firebase.firestore.FieldValue.arrayUnion({
           sender: userEmail,
           message: message,
-          timestamp: Date.now()
+          timestamp: `${date.getHours() > 12 ? date.getHours() - 12 : date.getHours()}:${date.getMinutes()} ${date.getHours() > 12 ? 'PM' : 'AM' }`
         }),
         readByReceiver: false
       })
