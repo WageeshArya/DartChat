@@ -85,3 +85,64 @@ body {
 }
 
 
+@media (max-width: 1550px) {
+  .signupContainer {
+    grid-template-columns: 1fr 1fr;
+    .signupImgContainer {
+      img {
+        width: 600px;
+        height: 500px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1125px) {
+  .signupContainer {
+    grid-template-columns: 2fr 1fr;
+    .signupImgContainer {
+      img {
+        width: 400px;
+        height: 300px;
+      }
+    }
+  }
+}
+
+@media (max-width: 925px) {
+  .signupContainer {
+    display: block;
+    .signupImgContainer {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .signupContainer {
+    .signupForm {
+      padding: 1rem;
+      margin: 1rem;
+      .error {
+        font-size: 1rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      div {
+        label {
+          font-size: 1rem;
+        }
+        input {
+          font-size: 1rem;
+          line-height: 2.5rem;
+          margin-bottom: 1rem;
+        }
+      }
+      a {
+        font-size: 0.75rem;
+      }
+    }
+  }
+  
+}

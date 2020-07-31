@@ -18,3 +18,17 @@
     line-height: 30px;
   }
 }
+
+@media (max-width: 400px) {
+  .footer {
+    padding: 0.25rem 0;
+    font-size: 0.75rem;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+    span {
+      line-height: 20px;
+    }
+  }
+}
