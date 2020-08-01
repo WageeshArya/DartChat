@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
 import signupBg from '../../background/signupBg.svg';
+import DartChatContext from '../../context/DartChatContext';
 import './Signup.scss';
 import Firebase from 'firebase';
 export const Signup = (props) => {
@@ -14,6 +15,8 @@ export const Signup = (props) => {
   const [emailErr, setEmailErr] = useState(false);
   const [passErr, setPassErr] = useState(false);
   const [passLenErr, setPassLenErr] = useState(false);
+
+  const ChatContext = useContext(DartChatContext);
 
   const emailUpdate = e => {
     setEmail(e.target.value);
@@ -45,6 +48,7 @@ export const Signup = (props) => {
           email: response.user.email
         })
         .then(() => {
+          ChatContext.setShowChatList(true);
           props.history.push('/dashboard')
         })
         .catch(err => {
