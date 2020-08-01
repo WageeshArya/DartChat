@@ -74,6 +74,7 @@ export const NewChat = (props) => {
     const foundChat = ChatContext.chats.find( chat => usersInChat.every( user => chat.users.includes(user)))
     const index = ChatContext.chats.indexOf(foundChat);
     ChatContext.setSelectedChat(index);
+    ChatContext.setShowChatList(false);
     sendMessage(key, message)
   }
 
